@@ -30,7 +30,6 @@ First we want to review the total steps taken per day.  Here is a histogram show
 
 ```r
 dailysteps <- with(activity, by(steps, date, sum))
-
 hist(dailysteps,
      xlab ="Number of Steps",
      ylab ="Frequency",
