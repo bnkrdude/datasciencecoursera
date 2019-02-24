@@ -18,6 +18,7 @@ This analysis is to analyze the data from a personal activity montitoring device
 The following is the code that read in the data:
 
 
+
 ```r
 setwd("/Users/Glenn/RCode/Reproducable Data/Project1Data")
 rm(list=ls())
@@ -36,7 +37,7 @@ hist(dailysteps,
      main ="Steps per Day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](PA1_template_files/figure-html/tot_steps_per_day_hist-1.png)<!-- -->
 
 ```r
 meanDailySteps <- mean(dailysteps, na.rm=TRUE)
@@ -66,7 +67,7 @@ with(newactivity, plot(ints, meanInterval,type= "l",
                        main ="Daily Activity Pattern"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/act_patern_plot-1.png)<!-- -->
 
 ```r
 numstepsMax <- newactivity[maxInterval,1]
@@ -105,7 +106,7 @@ hist(imp.dailysteps,
      main ="Steps per Day - imputed")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/impute_hist-1.png)<!-- -->
 
 ```r
 imp.meanDailySteps <- mean(imp.dailysteps)
@@ -155,4 +156,4 @@ plot(dailysteps.weekend, type="l",
      main ="Weekend Activity Pattern")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/two_line_plots-1.png)<!-- -->
