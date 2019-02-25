@@ -1,35 +1,26 @@
----
-title: "Analysis of Activity Movement Data - Project 1"
-author: "Glenn Walters"
-date: "2/24/2019"
-output: 
-  html_document: 
-    keep_md: yes
----
+Analysis of Activity Movement Data - Project 1
+================
+Glenn Walters
+2/24/2019
 
+This analysis is to analyze the data from a personal activity montitoring device. The devices collected data in 5 minute increments from October and November 2012. The variables collected are:
 
-
-This analysis is to analyze the data from a personal activity montitoring device. The devices collected data in 5 minute increments from October and November 2012.  The variables collected are:
-
-- Steps
-- Date of measurementsteps were taken
-- The 5 minute interval in which the measurement was taken
+-   Steps
+-   Date of measurementsteps were taken
+-   The 5 minute interval in which the measurement was taken
 
 The following is the code that read in the data:
 
-
-
-```r
+``` r
 setwd("/Users/Glenn/RCode/Reproducable Data/Project1Data")
 rm(list=ls())
 
 activity <- read.csv("activity.csv", header=TRUE)
 ```
 
-First we want to review the total steps taken per day.  Here is a histogram showing the total number of steps taken each day.  The missing values are removed.
+First we want to review the total steps taken per day. Here is a histogram showing the total number of steps taken each day. The missing values are removed.
 
-
-```r
+``` r
 dailysteps <- with(activity, by(steps, date, sum))
 hist(dailysteps,
      xlab ="Number of Steps",
@@ -37,20 +28,18 @@ hist(dailysteps,
      main ="Steps per Day")
 ```
 
-![](PA1_template_files/figure-html/tot_steps_per_day_hist-1.png)<!-- -->
+![](PA1_template_files/figure-markdown_github/tot_steps_per_day_hist-1.png)
 
-```r
+``` r
 meanDailySteps <- mean(dailysteps, na.rm=TRUE)
 medDailySteps <- median(dailysteps, na.rm=TRUE)
 ```
 
-The average number of steps per day is 10766.19.
-The median number of steps per day is 10765.
+The average number of steps per day is 10766.19. The median number of steps per day is 10765.
 
 The average number of steps taken each over time is shown below.
 
-
-```r
+``` r
 ## Calculates the Interval Means and the Maximum mean
 
 meanInterval <- with(activity, tapply(steps, interval, mean, na.rm=TRUE))
@@ -67,9 +56,9 @@ with(newactivity, plot(ints, meanInterval,type= "l",
                        main ="Daily Activity Pattern"))
 ```
 
-![](PA1_template_files/figure-html/act_patern_plot-1.png)<!-- -->
+![](PA1_template_files/figure-markdown_github/act_patern_plot-1.png)
 
-```r
+``` r
 numstepsMax <- newactivity[maxInterval,1]
 
 numMissing <- sum(is.na(activity$steps))
@@ -77,11 +66,9 @@ numMissing <- sum(is.na(activity$steps))
 
 The interval that possessed the highest average number of steps was 104 with an average number of steps of 206.17.
 
-Since there were 2304 missing values, the strategy used to impute was to use the Interval Mean.  A new dataset was created using the original data and filling the missing values for STEPS with the Interval Means.
+Since there were 2304 missing values, the strategy used to impute was to use the Interval Mean. A new dataset was created using the original data and filling the missing values for STEPS with the Interval Means.
 
-
-
-```r
+``` r
 ## Merging of the datasets
 
 act.imputed <- merge(activity, newactivity, by.x="interval", by.y="ints")
@@ -97,7 +84,7 @@ imp.dailysteps <- with(act.imputed, by(steps, date, sum))
 
 Here is a Histogram of the dataset with the missing values imputed.
 
-```r
+``` r
 ## Histogram
 
 hist(imp.dailysteps,
@@ -106,9 +93,9 @@ hist(imp.dailysteps,
      main ="Steps per Day - imputed")
 ```
 
-![](PA1_template_files/figure-html/impute_hist-1.png)<!-- -->
+![](PA1_template_files/figure-markdown_github/impute_hist-1.png)
 
-```r
+``` r
 imp.meanDailySteps <- mean(imp.dailysteps)
 imp.medDailySteps <- median(imp.dailysteps)
 ```
@@ -119,10 +106,9 @@ The median number of steps per day using the imputed data is 10766.19, compared 
 
 We can see that the Mean values do not change, however, the Median is slightly different.
 
-The final piece of the analysis is to compare the Weekday and Weekend activity captured by the measurement devices.  As expected, we can see the activity patterns are distinctly different between weekdays and weekend.
+The final piece of the analysis is to compare the Weekday and Weekend activity captured by the measurement devices. As expected, we can see the activity patterns are distinctly different between weekdays and weekend.
 
-
-```r
+``` r
 ## Code to calculate the Weekday and Weekend data
 
 day1 <- c("Monday","Tuesday","Wednesday","Thursday","Friday")
@@ -156,4 +142,4 @@ plot(dailysteps.weekend, type="l",
      main ="Weekend Activity Pattern")
 ```
 
-![](PA1_template_files/figure-html/two_line_plots-1.png)<!-- -->
+![](PA1_template_files/figure-markdown_github/two_line_plots-1.png)
