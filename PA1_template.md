@@ -12,10 +12,10 @@ This analysis is to analyze the data from a personal activity montitoring device
 The following is the code that read in the data:
 
 ``` r
-setwd("/Users/Glenn/RCode/Reproducable Data/Project1Data")
+setwd("/Users/Glenn/RCode/Reproducable Data/")
 rm(list=ls())
 
-activity <- read.csv("activity.csv", header=TRUE)
+activity <- read.csv("Project1Data/activity.csv", header=TRUE)
 ```
 
 First we want to review the total steps taken per day. Here is a histogram showing the total number of steps taken each day. The missing values are removed.

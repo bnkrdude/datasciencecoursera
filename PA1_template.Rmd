@@ -3,8 +3,8 @@ title: "Analysis of Activity Movement Data - Project 1"
 author: "Glenn Walters"
 date: "2/24/2019"
 output: 
-  html_document: 
-    keep_md: yes
+  rmarkdown::github_document
+   
 ---
 
 ```{r setup, include=FALSE}
@@ -22,10 +22,10 @@ The following is the code that read in the data:
 
 
 ```{r}
-setwd("/Users/Glenn/RCode/Reproducable Data/Project1Data")
+setwd("/Users/Glenn/RCode/Reproducable Data/")
 rm(list=ls())
 
-activity <- read.csv("activity.csv", header=TRUE)
+activity <- read.csv("Project1Data/activity.csv", header=TRUE)
 ```
 
 First we want to review the total steps taken per day.  Here is a histogram showing the total number of steps taken each day.  The missing values are removed.
